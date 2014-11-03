@@ -5,7 +5,7 @@ A Ruby-on-Rails application to list local restaurants and reviews
 
 Makers Academy Week 8 project, using the popular website [Yelp](http://www.yelp.co.uk) as a model
 
-![Yelp screenshot](images/yelp.jpg)
+![Yelp screenshot](https://github.com/makersacademy/course/raw/master/images/yelp.jpg)
 
 ##Spec
 
