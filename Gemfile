@@ -40,3 +40,4 @@ gem 'spring',        group: :development
 
 gem 'rspec-rails', group: :test
 gem 'capybara', group: :test
+gem 'rspec-collection_matchers', group: :test
