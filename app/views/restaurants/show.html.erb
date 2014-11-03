@@ -1,3 +1,16 @@
 <p><%= @restaurant.name %></p>
 <p><%= @restaurant.description %></p>
 <p><%= @restaurant.rating %></p>
+
+<h3>Reviews</h3>
+<% if !@restaurant.reviews.any? %>
+  <p>No reviews</p>
+<% else %>
+  <ul>
+    <% @restaurant.reviews.each do |review| %>
+      <li>
+        <% review.content %>, <strong><%= review.rating %></strong>/5
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -5,6 +5,21 @@
 		<%= link_to "#{restaurant.name}", restaurant_path(restaurant) %>
 		<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
 		<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %>
+		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
+
+		<h3>Reviews</h3>
+		<% if !restaurant.reviews.any? %>
+			<p>No reviews</p>
+		<% else %>
+			<ul>
+				<% restaurant.reviews.each do |review| %>
+					<li>
+						<%= review.thoughts %>, <strong><%= review.rating %></strong>/5
+					</li>
+				<% end %>
+			</ul>
+		<% end %>
+
 	<% end %>
 <% else %>
 	No restaurants yet!
