@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Viewing restaurants' do
+describe 'Restaurants' do
 
-	context 'no restaurants should have been added' do
+	context 'at the beginning no restaurants should have been added' do
 
 		it 'should display a prompt to add a restaurant' do
 			visit '/restaurants'
@@ -12,16 +12,23 @@ describe 'Viewing restaurants' do
 
 	end
 
-	context 'restaurants have been added' do
+	context 'viewing restaurants' do
 
 		before do
-			Restaurant.create(name: 'KFC')
+			@kfc = Restaurant.create(name: 'KFC')
 		end
 
 		it 'should display restaurants' do
 			visit '/restaurants'
 			expect(page).to have_content 'KFC'
 			expect(page).not_to have_content 'No restaurants yet'
+		end
+
+		it 'lets a user view a restaurant' do
+			visit '/restaurants'
+			click_link 'KFC'
+			expect(page).to have_content 'KFC'
+			expect(current_path).to eq "/restaurants/#{@kfc.id}"
 		end
 
 	end
@@ -41,3 +48,4 @@ describe 'Creating restaurants' do
 
 end
 
+	
