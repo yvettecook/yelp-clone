@@ -12,10 +12,20 @@ RSpec.describe Review, :type => :model do
     expect(review).to have(1).error_on(:rating)
   end
 
+  it 'is valid if the rating is between 1 and 5' do
+    review = Review.new(rating: 3)
+    expect(review).to have(0).error_on(:rating)
+  end
 
-    it 'is valid if the rating is between 1 and 5' do
-      review = Review.new(rating: 3)
-      expect(review).to have(0).error_on(:rating)
+  context 'Relationships' do
+
+    it 'should be linked to User' do
+      user = User.create(email: 'test@example.com',password:'password',password_confirmation:'password')
+      restaurant = Restaurant.create(name:'hix')
+      review = Review.create(thoughts: 'great', restaurant: restaurant, user_id: user.id, rating: 4)
+      expect(review.user.email).to eq('test@example.com')
     end
+
+  end
 
 end

@@ -35,7 +35,13 @@ describe 'Restaurants' do
 
 	context 'Creating restaurants' do
 
-		it 'prompts user to fill out a form, then displays the new restaurant' do
+		it 'if not logged in, error is shown' do
+			visit '/'
+			click_link('Add a restaurant')
+			expect(page).to have_content('You need to sign in or sign up before continuing')
+		end
+
+		it 'if logged in, prompts user to fill out a form, then displays the new restaurant' do
 			sign_up
 			visit '/restaurants'
 			click_link 'Add a restaurant'
