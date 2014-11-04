@@ -38,3 +38,13 @@ context 'user signed in and on the homepage' do
   end
 
 end
+
+context 'user must be logged in to create restaurants' do
+
+  it 'if not logged in, error is shown' do
+    visit '/'
+    click_link('Add a restaurant')
+    expect(page).to have_content('You need to sign in or sign up before continuing')
+  end
+
+end
