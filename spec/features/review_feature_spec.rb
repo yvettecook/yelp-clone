@@ -6,7 +6,7 @@ describe 'reviewing' do
     Restaurant.create(name: 'KFC')
   end
 
-  xit 'allows users to leave a review using a form' do
+  it 'allows users to leave a review using a form' do
     visit '/restaurants'
     click_link 'Review KFC'
     fill_in 'Thoughts', with: "so so"
@@ -18,7 +18,7 @@ describe 'reviewing' do
 
   context 'Users' do
 
-    xit 'email addresses are displayed on reviews they wrote' do
+    it 'email addresses are displayed on reviews they wrote' do
       sign_up
       visit '/restaurants'
       click_link 'Review KFC'
@@ -26,7 +26,7 @@ describe 'reviewing' do
       select '3', from: 'Rating'
       click_button 'Leave Review'
       expect(current_path).to eq '/restaurants'
-      expect(page).to have_content('Reviewer: test@example.com')
+      expect(page).to have_content('Reviewed by: test@example.com')
     end
 
   end
