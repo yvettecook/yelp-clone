@@ -18,7 +18,7 @@ Users of the site:
 * view a restaurants listings page, which should display all the reviews, along with the average rating of each restaurant
 * Validations should be in place for the restaurant and review forms - restaurants must be given a name and rating, reviews must be given a rating from 1-5 (comment is optional)
 
-**Version 2
+**Version 2**
 
 * Users can log in with facebook
 * A user must be logged in to create restaurants
@@ -28,6 +28,13 @@ Users of the site:
 * Some indication should be given on the page whether the user is currenty logged in, with links to the available actions
 * The email address of the reviewer should be displayed as part of the review
 * (Optional) Users can't review a restaurant which they created
+
+**Version 3**
+
+* Restaurants show their average rating
+* Users can endorse other reviews (updated in realtime with AJAX)
+* Restaurants have images, hosted using AWS
+
 
 
 ##Tools Used
