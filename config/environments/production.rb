@@ -1,4 +1,17 @@
 Rails.application.configure do
+
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_host_name => 's3-eu-west-1.amazonaws.com',
+  :s3_credentials => {
+    :bucket => Rails.application.secrets.S3_BUCKET_NAME ,
+    :access_key_id => Rails.application.secrets.AWS_ACCESS_KEY_ID ,
+    :secret_access_key => Rails.application.secrets.AWS_SECRET_ACCESS_KEY,
+  }
+
+}
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -75,4 +88,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+
 end

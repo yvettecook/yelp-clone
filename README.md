@@ -57,3 +57,4 @@ Users of the site:
 ## Known Issues
 
 * Can't have more than 1 anonymous review per restaurant - violates uniqueness validation
+* Image uploading not yet tested

@@ -12,7 +12,7 @@ class RestaurantsController < ApplicationController
 
 	def create
 		# @restaurant.reviews.create(params[:review].permit(:thoughts, :rating).merge(user_id: @user))
-		@restaurant = Restaurant.create(params[:restaurant].permit(:name, :description).merge(user_id: current_user.id))
+		@restaurant = Restaurant.create(params[:restaurant].permit(:name, :description, :image).merge(user_id: current_user.id))
 		if @restaurant.save
 			redirect_to restaurants_path
 		else
@@ -30,7 +30,7 @@ class RestaurantsController < ApplicationController
 
 	def update
 		@restaurant = Restaurant.find(params[:id])
-		@restaurant.update(params[:restaurant].permit(:name))
+		@restaurant.update(params[:restaurant].permit(:name, :description, :image))
 		redirect_to '/restaurants'
 	end
 
