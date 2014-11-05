@@ -15,7 +15,8 @@ describe 'Restaurants' do
 	context 'viewing restaurants' do
 
 		before do
-			@kfc = Restaurant.create(name: 'KFC')
+			User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
+			@kfc = Restaurant.create(name: 'KFC', user_id: 1)
 		end
 
 		it 'should display restaurants' do
@@ -48,6 +49,7 @@ describe 'Restaurants' do
 			fill_in 'Name', with: 'KFC'
 			click_button 'Create Restaurant'
 			expect(page).to have_content 'KFC'
+			expect(page).to have_content 'Created by: test@test.com'
 			expect(current_path).to eq '/restaurants'
 		end
 
@@ -56,12 +58,13 @@ describe 'Restaurants' do
 	context 'editing restaurants' do
 
 		before do
-			Restaurant.create(name: 'KFC')
+			User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
+			@kfc = Restaurant.create(name: 'KFC', user_id: 1)
 		end
 
 		it 'lets a user edit a restaurant' do
-			sign_up
 			visit '/restaurants'
+			sign_up
 			click_link 'Edit KFC'
 			fill_in 'Name', with: 'Kentucky Fried Chicken'
 			click_button 'Update Restaurant'
@@ -74,11 +77,12 @@ describe 'Restaurants' do
 	context 'deleting restaurants' do
 
 		before do
-			Restaurant.create(:name => 'KFC')
+			User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
+			@kfc = Restaurant.create(name: 'KFC', user_id: 1)
 		end
 
 		it 'removes a restaurant when a user clicks a delete link if the user is logged in' do
-			sign_up
+			sign_in
 			visit '/restaurants'
 			click_link 'Delete KFC'
 			expect(page).not_to have_content 'KFC'
@@ -86,10 +90,10 @@ describe 'Restaurants' do
 		end
 
 		it 'raises error if the user didnt create the restaurant' do
-			Restaurant.create(name: 'Velo', user_id: '5')
+			Restaurant.create(name: 'Velo', user_id: '1')
 			sign_up
 			visit '/restaurants'
-			click_link 'Delete KFC'
+			click_link 'Delete Velo'
 			expect(page).to have_content 'Velo'
 			expect(page).to have_content 'Permission denied'
 		end
@@ -113,10 +117,19 @@ describe 'Restaurants' do
 	def sign_up
 		visit '/'
 		click_link('Sign up')
-		fill_in('Email', with: 'test@example.com')
+		fill_in('Email', with: 'test@test.com')
 		fill_in('Password', with: 'testtest')
 		fill_in('Password confirmation', with: 'testtest')
 		click_button('Sign up')
 	end
+
+	def sign_in
+		visit '/'
+		click_link('Sign in')
+		fill_in('Email', with: 'test@example.com')
+		fill_in('Password', with: 'password')
+		click_button('Log in')
+	end
+
 
 end

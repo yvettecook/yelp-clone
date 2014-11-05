@@ -3,6 +3,7 @@
 <% if @restaurants.any? %>
 	<% @restaurants.each do |restaurant| %>
 		<h2><%= link_to "#{restaurant.name}", restaurant_path(restaurant) %></h2>
+		<p>Created by: <%="#{restaurant.user.email}" %></p>
 		<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
 		<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %>
 		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
@@ -16,7 +17,7 @@
 					<li>
 						<%= review.thoughts %>, <strong><%= review.rating %></strong>/5
 						<% if review.user != nil %>
-							Reviewed by: <%= review.user.email %>
+							<p>Reviewed by: <%= review.user.email %></p>
 						<% end %>
 					</li>
 				<% end %>
