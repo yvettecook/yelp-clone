@@ -4,7 +4,7 @@ describe 'reviewing' do
 
   before do
     User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
-    @kfc = Restaurant.create(name: 'KFC', user_id: 1)
+    @kfc = Restaurant.create(id: 1,name: 'KFC', user_id: 1)
   end
 
   it 'allows users to leave a review using a form' do
@@ -60,6 +60,22 @@ describe 'reviewing' do
 
   end
 
+  context 'Displaying ratings' do
+
+    before do
+      Review.create(thoughts: 'great', restaurant_id: 1, user_id: 1, rating: 5)
+      Review.create(thoughts: 'so so', restaurant_id: 1, user_id: 2, rating: 3)
+    end
+
+    it 'displays an average rating for all reviews' do
+      visit '/restaurants'
+      expect(page).to have_content('Average Rating: 4')
+    end
+
+  end
+
+
+
   def sign_up
     visit '/'
     click_link('Sign up')
@@ -68,6 +84,5 @@ describe 'reviewing' do
     fill_in('Password confirmation', with: 'testtest')
     click_button('Sign up')
   end
-
 
 end
