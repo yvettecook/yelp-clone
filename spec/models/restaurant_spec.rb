@@ -14,4 +14,10 @@ RSpec.describe Restaurant, :type => :model do
     expect(restaurant).to have(1).error_on(:name)
   end
 
+  it 'should be linked to User' do
+    user = User.create(email: 'test@example.com',password:'password',password_confirmation:'password')
+    restaurant = Restaurant.create(name: 'Velo', user_id: user.id)
+    expect(restaurant.user.email).to eq('test@example.com')
+  end
+
 end

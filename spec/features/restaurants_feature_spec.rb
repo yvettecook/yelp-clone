@@ -77,12 +77,21 @@ describe 'Restaurants' do
 			Restaurant.create(:name => 'KFC')
 		end
 
-		it 'removes a restaurant when a user clicks a delete link' do
+		it 'removes a restaurant when a user clicks a delete link if the user is logged in' do
 			sign_up
 			visit '/restaurants'
 			click_link 'Delete KFC'
 			expect(page).not_to have_content 'KFC'
 			expect(page).to have_content 'Restaurant deleted successfully'
+		end
+
+		it 'raises error if the user didnt create the restaurant' do
+			Restaurant.create(name: 'Velo', user_id: '5')
+			sign_up
+			visit '/restaurants'
+			click_link 'Delete KFC'
+			expect(page).to have_content 'Velo'
+			expect(page).to have_content 'Permission denied'
 		end
 
 	end

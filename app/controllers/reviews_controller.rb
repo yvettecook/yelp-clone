@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
 
   def create
     @restaurant = Restaurant.find(params[:restaurant_id])
-    # @restaurant.reviews.create(params[:review].permit(:thoughts, :rating))
     if user_signed_in?
       @user = current_user.id
     else
