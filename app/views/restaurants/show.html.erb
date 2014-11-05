@@ -14,7 +14,7 @@
           <p>Reviewed by: <%= review.user.email %></p>
         <% end %>
         <% if user_signed_in? && current_user.id == review.user_id %>
-          <%= link_to "Delete this review", restaurant_review_path(@restaurant, review), method: :delete %>
+          <%= link_to "Delete this review", review_path(review), method: :delete %>
         <% end %>
       </li>
     <% end %>

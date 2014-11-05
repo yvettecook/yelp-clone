@@ -52,3 +52,8 @@ Users of the site:
 * Associations
 * Validations
 * AJAX in Rails
+
+
+## Known Issues
+
+* Can't have more than 1 anonymous review per restaurant - violates uniqueness validation

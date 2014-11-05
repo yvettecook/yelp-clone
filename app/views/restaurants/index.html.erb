@@ -20,6 +20,8 @@
 						<% if review.user != nil %>
 							<p>Reviewed by: <%= review.user.email %></p>
 						<% end %>
+						<%= link_to 'Endorse review', review_endorsements_path(review), class: 'endorsements-link' %>
+						<span class='endorsements_count'> <%= review.endorsements.count %></span> endorsements
 					</li>
 				<% end %>
 			</ul>
