@@ -45,6 +45,19 @@ describe 'reviewing' do
       expect(page).to have_content('Sorry, you can only review a restaurant once')
     end
 
+    it 'can delete their own reviews' do
+      sign_up
+      visit '/restaurants'
+      click_link 'Review KFC'
+      expect(page).not_to have_link('Sign in')
+      fill_in 'Thoughts', with: "so so"
+      select '3', from: 'Rating'
+      click_button 'Leave Review'
+      click_link 'KFC'
+      click_link 'Delete this review'
+      expect(page).not_to have_content('so so')
+    end
+
   end
 
   def sign_up
