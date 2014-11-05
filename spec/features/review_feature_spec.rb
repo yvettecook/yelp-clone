@@ -31,6 +31,20 @@ describe 'reviewing' do
       expect(page).to have_content('Reviewed by: test@test.com')
     end
 
+    it 'can only leave one review per restaurant' do
+      sign_up
+      visit '/restaurants'
+      click_link 'Review KFC'
+      fill_in 'Thoughts', with: "so so"
+      select '3', from: 'Rating'
+      click_button 'Leave Review'
+      click_link 'Review KFC'
+      fill_in 'Thoughts', with: "so so"
+      select '3', from: 'Rating'
+      click_button 'Leave Review'
+      expect(page).to have_content('Sorry, you can only review a restaurant once')
+    end
+
   end
 
   def sign_up

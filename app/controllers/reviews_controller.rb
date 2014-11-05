@@ -7,13 +7,14 @@ class ReviewsController < ApplicationController
 
   def create
     @restaurant = Restaurant.find(params[:restaurant_id])
-    if user_signed_in?
-      @user_id = current_user.id
-    else
-      @user = nil
-    end
+    @user_id = current_user.id if user_signed_in?
     @restaurant.reviews.create(params[:review].permit(:thoughts, :rating).merge(user_id: @user_id))
-    redirect_to restaurants_path
+    if @restaurant.save
+      redirect_to restaurants_path
+    else
+      redirect_to restaurants_path
+      flash[:notice] = 'Sorry, you can only review a restaurant once'
+    end
   end
 
 

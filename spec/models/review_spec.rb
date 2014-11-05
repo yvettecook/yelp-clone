@@ -26,6 +26,14 @@ RSpec.describe Review, :type => :model do
       expect(review.user.email).to eq('test@example.com')
     end
 
+    it 'should only allow one review per user per restaurant' do
+      user = User.create(email: 'test@example.com',password:'password',password_confirmation:'password')
+      restaurant = Restaurant.create(name:'hix')
+      review = Review.create(thoughts: 'great', restaurant: restaurant, user_id: user.id, rating: 4)
+      review2 = Review.create(thoughts: 'great', restaurant: restaurant, user_id: user.id, rating: 4)
+      expect(review2).to have(1).error
+    end
+
   end
 
 end
