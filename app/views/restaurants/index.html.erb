@@ -9,7 +9,7 @@
 		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
 
 		<h3>Reviews</h3>
-		<h4>Average Rating: <%= restaurant.average_rating.to_i %></h3>
+		<h4>Average Rating: <%= star_rating(restaurant.average_rating) %></h3>
 		<% if !restaurant.reviews.any? %>
 			<p>No reviews</p>
 		<% else %>
