@@ -49,7 +49,6 @@ describe 'Restaurants' do
 			fill_in 'Name', with: 'KFC'
 			click_button 'Create Restaurant'
 			expect(page).to have_content 'KFC'
-			expect(page).to have_content 'Created by: test@test.com'
 			expect(current_path).to eq '/restaurants'
 		end
 

@@ -5,5 +5,6 @@ class EndorsementsController < ApplicationController
     @review.endorsements.create
     render json: {new_endorsement_count: @review.endorsements.count}
   end
-  
+
+
 end
