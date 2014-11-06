@@ -1,6 +1,9 @@
 <p><%= @restaurant.name %></p>
 <p><%= @restaurant.description %></p>
 <p><%= @restaurant.rating %></p>
+<% if @restaurant.image != nil %>
+  <%= image_tag @restaurant.image.url(:thumb) %>
+<% end %>
 
 <h3>Reviews</h3>
 <% if !@restaurant.reviews.any? %>
