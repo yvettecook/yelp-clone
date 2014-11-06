@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+ html, body { margin: 0px; padding: 0px; border: 0px; }
+
+.header {
+  height: 20em;
+  background-color: salmon;
+}
+
+body {
+  background-image: src('images/background.jpg');
+}
+
+.restaurant_list {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.restaurant {
+  float: left;
+  width: 200px;
+  height: 20em;
+  margin: .25em;
+  text-align: center;
+}

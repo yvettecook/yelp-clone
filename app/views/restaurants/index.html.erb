@@ -5,26 +5,27 @@
 <section class='restaurants_list'>
 <% if @restaurants.any? %>
 	<% @restaurants.each do |restaurant| %>
-	<section class='restaurant-thumb'>
-			<%= image_tag restaurant.image.url(:thumb) %>
-	</section>
+	<section class='restaurant'>
+		<section class='restaurant-thumb'>
+				<%= image_tag restaurant.image.url(:thumb) %>
+		</section>
 		<h2><%= link_to "#{restaurant.name}", restaurant_path(restaurant) %></h2>
-
 		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
 
-		<h3>Reviews</h3>
-		<h4>Average Rating: <%= star_rating(restaurant.average_rating) %></h3>
-		<% if !restaurant.reviews.any? %>
-			<p>No reviews</p>
-		<% else %>
-			<ul>
-				<% restaurant.reviews.each do |review| %>
-					<li>
-						<%= review.thoughts %>, <strong><%= review.rating %></strong>/5
+			<h3>Reviews</h3>
+			<h4><%= star_rating(restaurant.average_rating) %></h3>
+			<% if !restaurant.reviews.any? %>
+				<p>No reviews</p>
+			<% else %>
+				<ul>
+					<% restaurant.reviews.each do |review| %>
+						<li>
+							<%= review.thoughts %>, <strong><%= review.rating %></strong>/5
 
-					</li>
-				<% end %>
-			</ul>
+						</li>
+					<% end %>
+				</ul>
+			</section>
 		<% end %>
 
 	<% end %>
