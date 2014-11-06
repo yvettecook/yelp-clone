@@ -58,12 +58,12 @@ describe 'Restaurants' do
 
 		before do
 			User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
-			@kfc = Restaurant.create(name: 'KFC', user_id: 1)
+			@kfc = Restaurant.create(id: 1, name: 'KFC', user_id: 1)
 		end
 
 		it 'lets a user edit a restaurant' do
-			visit '/restaurants'
 			sign_up
+			visit '/restaurants/1'
 			click_link 'Edit KFC'
 			fill_in 'Name', with: 'Kentucky Fried Chicken'
 			click_button 'Update Restaurant'
@@ -77,21 +77,21 @@ describe 'Restaurants' do
 
 		before do
 			User.create(id: 1, email: 'test@example.com', password:'password', password_confirmation:'password')
-			@kfc = Restaurant.create(name: 'KFC', user_id: 1)
+			@kfc = Restaurant.create(id: 1, name: 'KFC', user_id: 1)
 		end
 
 		it 'removes a restaurant when a user clicks a delete link if the user is logged in' do
 			sign_in
-			visit '/restaurants'
+			visit '/restaurants/1'
 			click_link 'Delete KFC'
 			expect(page).not_to have_content 'KFC'
 			expect(page).to have_content 'Restaurant deleted successfully'
 		end
 
 		it 'raises error if the user didnt create the restaurant' do
-			Restaurant.create(name: 'Velo', user_id: '1')
+			Restaurant.create(id: 2, name: 'Velo', user_id: '1')
 			sign_up
-			visit '/restaurants'
+			visit '/restaurants/2'
 			click_link 'Delete Velo'
 			expect(page).to have_content 'Velo'
 			expect(page).to have_content 'Permission denied'

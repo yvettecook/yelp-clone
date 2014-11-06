@@ -9,8 +9,7 @@
 			<%= image_tag restaurant.image.url(:thumb) %>
 	</section>
 		<h2><%= link_to "#{restaurant.name}", restaurant_path(restaurant) %></h2>
-		<%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %>
-		<%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %>
+
 		<%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %>
 
 		<h3>Reviews</h3>
@@ -22,11 +21,7 @@
 				<% restaurant.reviews.each do |review| %>
 					<li>
 						<%= review.thoughts %>, <strong><%= review.rating %></strong>/5
-						<% if review.user != nil %>
-							<p>Reviewed by: <%= review.user.email %></p>
-						<% end %>
-						<%= link_to 'Endorse review', review_endorsements_path(review), class: 'endorsements-link' %>
-						<span class='endorsements_count'> <%= review.endorsements.count %></span> endorsements
+
 					</li>
 				<% end %>
 			</ul>

@@ -28,6 +28,7 @@ describe 'reviewing' do
       select '3', from: 'Rating'
       click_button 'Leave Review'
       expect(current_path).to eq '/restaurants'
+      visit '/restaurants/1'
       expect(page).to have_content('Reviewed by: test@test.com')
     end
 
