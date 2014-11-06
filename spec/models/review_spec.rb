@@ -34,8 +34,11 @@ RSpec.describe Review, :type => :model do
       expect(review2).to have(1).error
     end
 
-    xit 'can have 2 anonymous reviews per restaurant' do
-
+    it 'can have 2 anonymous reviews per restaurant' do
+      restaurant = Restaurant.create(name:'hix')
+      review = Review.create(thoughts: 'great', restaurant: restaurant, user_id: nil, rating: 4)
+      review2 = Review.create(thoughts: 'great', restaurant: restaurant, user_id: nil, rating: 4)
+      expect(review2).to have(0).error
     end
 
   end
