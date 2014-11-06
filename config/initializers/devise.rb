@@ -22,7 +22,7 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  config.omniauth :facebook, Rails.application.secrets.facebook_id, Rails.application.secrets.facebook_secret
+  config.omniauth :facebook, ENV['facebook_id'], ENV['facebook_secret']
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
